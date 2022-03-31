@@ -22,11 +22,16 @@ function App() {
     setCurrentQuestion(question);
   }
 
+  console.log(currentQuestion);
+
   return (
     <div className="App">
       <EightBall />
       <Questions updateQuestion={updateQuestion} />
-      <ShakeBtn updateAnwser={setCurrentAnwser} />
+      <ShakeBtn
+        updateAnwser={setCurrentAnwser}
+        questionIsPresent={!!currentQuestion}
+      />
       <CurrentAnswer currentAnswer={currentAnswer} />
       <AnswerBoard
         currentAnswer={currentAnswer}

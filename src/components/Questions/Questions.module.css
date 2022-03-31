@@ -2,3 +2,10 @@
   width: 50rem;
   margin-bottom: 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .Select {
+    width: 30rem;
+    font-size: 1.4rem;
+  }
+}

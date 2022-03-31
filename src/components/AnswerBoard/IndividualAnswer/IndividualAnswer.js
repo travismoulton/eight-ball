@@ -10,10 +10,15 @@ export default function IndividualAnswer({
 }) {
   const [allPredictions, setAllPredictions] = useState([]);
 
+  // This will be used when finding the correct prediction object
+  // based on the average prediciton score
   const answerValues = [0, 10, 25, 50, 75, 90, 98, 100];
 
   useEffect(() => {
-    if (question === currentQuestion?.label && currentAnswer) {
+    const thisQuestionHasBeenAsked =
+      question === currentQuestion?.label && currentAnswer;
+
+    if (thisQuestionHasBeenAsked) {
       setAllPredictions((prevAllPredictions) => [
         ...prevAllPredictions,
         currentAnswer.score,
@@ -21,17 +26,23 @@ export default function IndividualAnswer({
     }
   }, [question, currentAnswer, currentQuestion]);
 
+  // Get the average prediction score by reducing all the values from the predictions
+  // array and dividing by the array
   const averagePredictionScore =
     allPredictions.reduce((prevVal, curVal) => prevVal + curVal, 0) /
     allPredictions.length;
 
   function getClosestPrediction() {
-    const closestScore = answerValues.reduce((a, b) =>
-      Math.abs(b - averagePredictionScore) <
-      Math.abs(a - averagePredictionScore)
-        ? b
-        : a
-    );
+    // compare each value in the array to the averagePredictionScore
+    // Return the closest value to access that prediction object
+    const closestScore =
+      allPredictions.length !== 0 &&
+      answerValues.reduce((a, b) => {
+        return Math.abs(b - averagePredictionScore) <
+          Math.abs(a - averagePredictionScore)
+          ? b
+          : a;
+      });
 
     if (!closestScore) return;
 
@@ -47,7 +58,7 @@ export default function IndividualAnswer({
       <p>
         {prediction ? prediction.value : "You didn't ask yet!"}{" "}
         {allPredictions.length !== 0 &&
-          Math.round(averagePredictionScore) + " %"}
+          `(${Math.round(averagePredictionScore)} %)`}
       </p>
     </div>
   );
