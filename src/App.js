@@ -5,6 +5,7 @@ import EightBall from "./components/EightBall/EightBall";
 import Questions from "./components/Questions/Questions";
 import ShakeBtn from "./components/ShakeBtn/ShakeBtn";
 import CurrentAnswer from "./components/CurrentAnswer/CurrentAnswer";
+import AnswerBoard from "./components/AnswerBoard/AnswerBoard";
 
 function App() {
   useEffect(() => {
@@ -15,10 +16,11 @@ function App() {
   const [currentAnswer, setCurrentAnwser] = useState(null);
 
   function updateQuestion(question) {
-    setCurrentQuestion({ label: question.label, value: question.value });
-  }
+    // Remove the old anwser when updating the question
+    setCurrentAnwser(null);
 
-  console.log(currentAnswer);
+    setCurrentQuestion(question);
+  }
 
   return (
     <div className="App">
@@ -26,6 +28,10 @@ function App() {
       <Questions updateQuestion={updateQuestion} />
       <ShakeBtn updateAnwser={setCurrentAnwser} />
       <CurrentAnswer currentAnswer={currentAnswer} />
+      <AnswerBoard
+        currentAnswer={currentAnswer}
+        currentQuestion={currentQuestion}
+      />
     </div>
   );
 }
