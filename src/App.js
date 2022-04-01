@@ -4,12 +4,9 @@ import { questions } from "./shared/questions";
 import "./App.css";
 import BallAndShakeWrapper from "./components/BallAndShakeWrapper/BallAndShakeWrapper";
 import ShowBoardBtn from "./components/ShowBoardBtn/ShowBoardBtn";
-import EightBall from "./components/EightBall/EightBall";
 import Questions from "./components/Questions/Questions";
-import ShakeBtn from "./components/ShakeBtn/ShakeBtn";
 import CurrentAnswer from "./components/CurrentAnswer/CurrentAnswer";
 import AnswerBoard from "./components/AnswerBoard/AnswerBoard";
-import TryAgain from "./components/TryAgain/TryAgain";
 
 function App() {
   useEffect(() => {
@@ -17,9 +14,9 @@ function App() {
   }, []);
 
   const [showBall, setShowBall] = useState(false);
+  const [showBoard, setShowBoard] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(null);
   const [currentAnswer, setCurrentAnwser] = useState(null);
-  const [showBoard, setShowBoard] = useState(true);
 
   function updateQuestionIndex(question) {
     // Remove the old anwser when updating the question
@@ -31,13 +28,22 @@ function App() {
   const currentQuestion = questions[questionIndex];
 
   useEffect(() => {
-    setShowBall(!!currentQuestion);
-    setShowBoard(!currentQuestion);
-  }, [currentQuestion]);
+    // When the board is showing, and the user asks a question, hide the board and show the ball
+    // and shake button
+    if (showBoard && currentQuestion) {
+      setShowBall(true);
+      setShowBoard(false);
+    }
+  }, [currentQuestion, showBoard]);
 
+  // This will be called from the show board button when the user wants to stop
+  // asking questions and look at the prediction board
   function showBoardAndHideBall() {
     setShowBall(false);
     setShowBoard(true);
+
+    // Whenever transitioning from showBall to showBoard state, the question
+    // and anwser should be reset
     setCurrentAnwser(null);
     setQuestionIndex(null);
   }
@@ -69,12 +75,3 @@ function App() {
 }
 
 export default App;
-
-// <>
-// <EightBall />
-// <ShakeBtn
-//   updateAnwser={setCurrentAnwser}
-//   questionIsPresent={!!currentQuestion}
-// />
-// <TryAgain show={showTryAgain} setQuestionIndex={setQuestionIndex} />
-// </>

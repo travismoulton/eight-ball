@@ -12,7 +12,7 @@ export default function IndividualAnswer({
 
   // This will be used when finding the correct prediction object
   // based on the average prediciton score
-  const answerValues = [0, 10, 25, 50, 75, 90, 98, 100];
+  const answerValues = answers.map((answer) => answer.score);
 
   useEffect(() => {
     const thisQuestionHasBeenAsked =

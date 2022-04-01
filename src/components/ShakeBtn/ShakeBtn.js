@@ -1,10 +1,6 @@
 import { answers } from "../../shared/answers";
 
-export default function ShakeBtn({
-  updateAnwser,
-  questionIsPresent,
-  shakeBall,
-}) {
+export default function ShakeBtn({ updateAnwser, shakeBall }) {
   function selectRandomAnwser() {
     // Use the spread operator to return a new object even when the same random
     // answer is selected twice in a row. This makes sure that AnswerBoard recieves
@@ -15,10 +11,6 @@ export default function ShakeBtn({
 
   function clickHandler() {
     shakeBall();
-
-    // If there is no question, give the user a message
-    if (!questionIsPresent)
-      return updateAnwser({ value: "You didn't ask a question!" });
 
     return updateAnwser(selectRandomAnwser());
   }

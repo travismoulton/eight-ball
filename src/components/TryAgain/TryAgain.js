@@ -8,5 +8,11 @@ export default function TryAgain({ show, setQuestionIndex, setBallIdle }) {
     setBallIdle();
   }
 
-  return show && <button onClick={clickHandler}>Try again!</button>;
+  return (
+    show && (
+      <button style={{ marginBottom: "2rem" }} onClick={clickHandler}>
+        Ask a random question
+      </button>
+    )
+  );
 }
