@@ -9,8 +9,6 @@ export default function Questions({ updateQuestion, questionIndex }) {
     value: i,
   }));
 
-  console.log(questionIndex);
-
   return (
     <Select
       options={selectOptions}

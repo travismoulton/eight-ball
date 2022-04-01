@@ -16,11 +16,11 @@ function App() {
   const [showBall, setShowBall] = useState(false);
   const [showBoard, setShowBoard] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(null);
-  const [currentAnswer, setCurrentAnwser] = useState(null);
+  const [currentAnswer, setCurrentAnswer] = useState(null);
 
   function updateQuestionIndex(question) {
     // Remove the old anwser when updating the question
-    setCurrentAnwser(null);
+    setCurrentAnswer(null);
 
     setQuestionIndex(question.value);
   }
@@ -44,7 +44,7 @@ function App() {
 
     // Whenever transitioning from showBall to showBoard state, the question
     // and anwser should be reset
-    setCurrentAnwser(null);
+    setCurrentAnswer(null);
     setQuestionIndex(null);
   }
 
@@ -57,7 +57,7 @@ function App() {
       />
       {showBall && (
         <BallAndShakeWrapper
-          updateAnswer={setCurrentAnwser}
+          updateAnswer={setCurrentAnswer}
           show={showBall}
           currentQuestion={currentQuestion}
           setQuestionIndex={setQuestionIndex}

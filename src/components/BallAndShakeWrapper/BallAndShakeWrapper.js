@@ -7,6 +7,7 @@ import TryAgain from "../TryAgain/TryAgain";
 export default function BallAndShakeWrapper({
   updateAnswer,
   setQuestionIndex,
+  clearAnswer,
 }) {
   const [ballIdle, setBallIdle] = useState(true);
   const [ballShaken, setBallShaken] = useState(false);
@@ -24,13 +25,14 @@ export default function BallAndShakeWrapper({
   return (
     <>
       <EightBall />
-      {ballIdle && (
-        <ShakeBtn updateAnwser={updateAnswer} shakeBall={shakeBall} />
-      )}
+
+      <ShakeBtn updateAnwser={updateAnswer} shakeBall={shakeBall} />
+
       <TryAgain
         show={ballShaken}
         setBallIdle={setBallIdleHandler}
         setQuestionIndex={setQuestionIndex}
+        clearAnswer={() => updateAnswer(null)}
       />
     </>
   );
