@@ -22,8 +22,6 @@ function App() {
     setCurrentQuestion(question);
   }
 
-  console.log(currentQuestion);
-
   return (
     <div className="App">
       <EightBall />
