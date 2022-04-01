@@ -16,7 +16,7 @@ export default function IndividualAnswer({
 
   useEffect(() => {
     const thisQuestionHasBeenAsked =
-      question === currentQuestion?.label && currentAnswer;
+      question === currentQuestion && currentAnswer;
 
     if (thisQuestionHasBeenAsked) {
       setAllPredictions((prevAllPredictions) => [

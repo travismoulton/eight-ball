@@ -2,7 +2,11 @@ import { questions } from "../../shared/questions";
 import classes from "./AnswerBoard.module.css";
 import IndividualAnswer from "./IndividualAnswer/IndividualAnswer";
 
-export default function AnswerBoard({ currentQuestion, currentAnswer }) {
+export default function AnswerBoard({
+  currentQuestion,
+  currentAnswer,
+  showBoard,
+}) {
   const answers = questions.map((question) => (
     <IndividualAnswer
       question={question}
@@ -12,5 +16,12 @@ export default function AnswerBoard({ currentQuestion, currentAnswer }) {
     />
   ));
 
-  return <div className={classes.Board}>{answers}</div>;
+  return (
+    <div
+      className={classes.Board}
+      style={{ display: !showBoard ? "none" : "flex" }}
+    >
+      {answers}
+    </div>
+  );
 }
